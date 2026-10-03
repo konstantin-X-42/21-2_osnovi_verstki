@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="row">
+    <div class="col-2"></div>           <!--  col-2 - отступ слева 2 будстрапа из 12 -->
+    <div class="col-8">                 <!--  col-8 - ширина под размещение контента (карточки) 8 будстрапов из 12 -->
+        <!--  row - для деления на две колонки контента,   mt-5 - максимальный отступ сверху до карточки, -->
+        <div class="row mt-5">
+            <div class="col-7">         <!--  col-7 - внутри row колонка 7  из 12 -->
+                <div class="card text-bg-primary">
+                    <div class="card-body">
+                        <h2>Контактные данные:</h2>
+                        <div class="row">
+                            <div class="col-6">Москва</div>
+                            <div class="col-6">+7 777 777 7777</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">Санкт-Петербург</div>
+                            <div class="col-6">+7 888 888 8888</div>
+                        </div>
+                    </div>
+                </div>
+<!--                Контактные данные:<br>             &lt;!&ndash;  <br> - перенос текста на следующую строку &ndash;&gt;-->
+<!--                Москва +7 777 777 7777<br>-->
+<!--                Санкт-Петербург +7 888 888 8888<br>-->
+            </div>
+            <div class="col-5">         <!--  col-5 - внутри row колонка 5  из 12 -->
+                <div class="card text-bg-secondary">
+                    <div class="card-body">
+                        <form>
+                            <h2>Оставьте заявку</h2>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Имя">
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Email">
+                            </div>
+
+                            <div class="mb-3">
+                                <textarea class="form-control" placeholder="Сообщение" rows="3"></textarea>    <!--  rows="3" - высота ячейки на три строки -->
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Отправить</button>             <!--  w-100 - ширина кнопки во всю длину -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-2"></div>           <!--  col-2 - отступ справа 2 будстрапа из 12 -->
+</div>
+</body>
+</html>

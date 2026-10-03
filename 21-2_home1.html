@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная - Магазин</title>
+    <!-- Локальный Bootstrap (заработает сразу после Шага 1) -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Иконки из интернета -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+        <!-- Импорт стилей из отдельного файла  -->
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <div class="sidebar d-flex flex-column p-3 text-white">
+        <a href="#" class="d-flex align-items-center mb-4 me-md-auto text-white text-decoration-none fs-5 fw-semibold">
+            <i class="bi bi-bootstrap-fill me-2 fs-4"></i> Меню
+        </a>
+        <hr class="opacity-25 my-1">
+
+        <ul class="nav nav-pills flex-column mb-auto gap-1 pt-2">
+            <li class="nav-item">
+                <a href="#" class="nav-link active-custom d-flex align-items-center gap-2">
+                    <i class="bi bi-house-door-fill"></i> Главная
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link nav-link-custom d-flex align-items-center gap-2">
+                    <i class="bi bi-grid"></i> Категории
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link nav-link-custom d-flex align-items-center gap-2">
+                    <i class="bi bi-card-list"></i> Заказы
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link nav-link-custom d-flex align-items-center gap-2">
+                    <i class="bi bi-telephone"></i> Контакты
+                </a>
+            </li>
+        </ul>
+
+        <hr class="opacity-25 mb-3">
+
+        <div class="dropup">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://i.pinimg.com/236x/71/8f/52/718f525283d54acddfeec21fa9e93a16.jpg" alt="mdo" width="32" height="32" class="rounded-circle me-2">
+                <strong>Пользователь</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
+                <li><a class="dropdown-item py-2" href="#">Профиль</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item py-2 text-danger" href="#">Выход</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="container-fluid text-center">
+            <h1 class="display-5 fw-normal mt-4 mb-2">Главная</h1>
+            <p class="text-muted mb-5">Вы находитесь на сайте, предназначенном для продажи товаров.</p>
+
+            <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                <!-- Товар 1 -->
+                <div class="col" style="max-width: 320px;">
+                    <div class="card h-100 shadow-sm border-light-subtle rounded-3">
+                        <div class="card-header bg-light py-3 border-bottom-0">
+                            <h4 class="my-0 fw-normal fs-5 text-muted">Товар 1</h4>
+                        </div>
+                        <div class="card-body px-4 pb-4">
+                            <h1 class="card-title pricing-card-title mb-4">$ 100</h1>
+                            <ul class="list-unstyled text-muted small lh-lg mb-4 text-start text-md-center">
+                                <li>10 users included, 2 GB of storage,</li>
+                                <li>Email support, Help center access</li>
+                            </ul>
+                            <button type="button" class="w-100 btn btn-outline-primary py-2 rounded-2">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 2 -->
+                <div class="col" style="max-width: 320px;">
+                    <div class="card h-100 shadow-sm border-light-subtle rounded-3">
+                        <div class="card-header bg-light py-3 border-bottom-0">
+                            <h4 class="my-0 fw-normal fs-5 text-muted">Товар 1</h4>
+                        </div>
+                        <div class="card-body px-4 pb-4">
+                            <h1 class="card-title pricing-card-title mb-4">$ 100</h1>
+                            <ul class="list-unstyled text-muted small lh-lg mb-4 text-start text-md-center">
+                                <li>10 users included, 2 GB of storage,</li>
+                                <li>Email support, Help center access</li>
+                            </ul>
+                            <button type="button" class="w-100 btn btn-outline-primary py-2 rounded-2">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 3 -->
+                <div class="col" style="max-width: 320px;">
+                    <div class="card h-100 shadow-sm border-light-subtle rounded-3">
+                        <div class="card-header bg-light py-3 border-bottom-0">
+                            <h4 class="my-0 fw-normal fs-5 text-muted">Товар 1</h4>
+                        </div>
+                        <div class="card-body px-4 pb-4">
+                            <h1 class="card-title pricing-card-title mb-4">$ 100</h1>
+                            <ul class="list-unstyled text-muted small lh-lg mb-4 text-start text-md-center">
+                                <li>10 users included, 2 GB of storage,</li>
+                                <li>Email support, Help center access</li>
+                            </ul>
+                            <button type="button" class="w-100 btn btn-outline-primary py-2 rounded-2">Купить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <!-- Скрипт: открывает меню вручную, если PyCharm блокирует автоматику -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var btn = document.getElementById('dropdownUser');
+            if (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var menu = btn.nextElementSibling;
+                    if (menu) {
+                        menu.classList.toggle('show');
+                        // Корректно переключаем состояние для доступности
+                        var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+                        btn.setAttribute('aria-expanded', !isExpanded);
+                    }
+                });
+
+                // Закрываем меню, если кликнули в любое другое место экрана
+                document.addEventListener('click', function (e) {
+                    if (!btn.contains(e.target)) {
+                        var menu = btn.nextElementSibling;
+                        if (menu && menu.classList.contains('show')) {
+                            menu.classList.remove('show');
+                            btn.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

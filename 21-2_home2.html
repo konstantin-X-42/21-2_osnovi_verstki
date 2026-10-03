@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Категории - Магазин</title>
+    <!-- Локальный Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Правильная интернет-ссылка на иконки Bootstrap -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <!-- Импорт стилей из отдельного файла  -->
+    <link href="style.css" rel="stylesheet">
+    <style>
+        /* Дополнительный локальный стиль специально для серых блоков-заглушек под картинки */
+        .card-img-placeholder {
+            width: 100%;
+            height: 225px;
+            background-color: #55595c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #eceeef;
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <div class="sidebar d-flex flex-column p-3 text-white">
+        <a href="21-2_home1.html" class="d-flex align-items-center mb-4 me-md-auto text-white text-decoration-none fs-5 fw-semibold">
+            <i class="bi bi-bootstrap-fill me-2 fs-4"></i> Меню
+        </a>
+        <hr class="opacity-25 my-1">
+
+        <ul class="nav nav-pills flex-column mb-auto gap-1 pt-2">
+            <li class="nav-item">
+                <!-- Обычная ссылка на Главную -->
+                <a href="21-2_home1.html" class="nav-link nav-link-custom d-flex align-items-center gap-2">
+                    <i class="bi bi-house-door"></i> Главная
+                </a>
+            </li>
+            <li>
+                <!-- АКТИВНАЯ ССЫЛКА НА КАТЕГОРИИ (Подсвечена синим) -->
+                <a href="21-2_home2.html" class="nav-link active-custom d-flex align-items-center gap-2">
+                    <i class="bi bi-grid-fill"></i> Категории
+                </a>
+            </li>
+            <li>
+                <a href="21-2_home3.html" class="nav-link nav-link-custom d-flex align-items-center gap-2">
+                    <i class="bi bi-card-list"></i> Заказы
+                </a>
+            </li>
+            <li>
+                <a href="21-2_home4.html" class="nav-link nav-link-custom d-flex align-items-center gap-2">
+                    <i class="bi bi-telephone"></i> Контакты
+                </a>
+            </li>
+        </ul>
+
+        <hr class="opacity-25 mb-3">
+
+        <div class="dropup">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                <!-- Ваша аватарка с котиком -->
+                <img src="https://i.pinimg.com/236x/71/8f/52/718f525283d54acddfeec21fa9e93a16.jpg" alt="mdo" width="32" height="32" class="rounded-circle me-2">
+                <strong>Пользователь</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
+                <li><a class="dropdown-item py-2" href="#">Профиль</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item py-2 text-danger" href="#">Выход</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT (Каталог из вашего примера) -->
+    <div class="main-content">
+        <div class="container-fluid">
+
+            <h1 class="display-5 text-center fw-normal mt-4 mb-5">Каталог</h1>
+
+            <!-- Сетка карточек каталога (по 2 штуки в ряд) -->
+            <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
+
+                <!-- Товар 1 -->
+                <div class="col" style="max-width: 500px;">
+                    <div class="card h-100 shadow-sm border-light-subtle">
+                        <div class="card-img-placeholder">Thumbnail</div>
+                        <div class="card-body p-3">
+                            <p class="card-text text-secondary mb-4">
+                                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary px-3">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary px-3">Edit</button>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 2 -->
+                <div class="col" style="max-width: 500px;">
+                    <div class="card h-100 shadow-sm border-light-subtle">
+                        <div class="card-img-placeholder">Thumbnail</div>
+                        <div class="card-body p-3">
+                            <p class="card-text text-secondary mb-4">
+                                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary px-3">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary px-3">Edit</button>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 3 -->
+                <div class="col" style="max-width: 500px;">
+                    <div class="card h-100 shadow-sm border-light-subtle">
+                        <div class="card-img-placeholder">Thumbnail</div>
+                        <div class="card-body p-3">
+                            <p class="card-text text-secondary mb-4">
+                                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary px-3">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary px-3">Edit</button>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 4 -->
+                <div class="col" style="max-width: 500px;">
+                    <div class="card h-100 shadow-sm border-light-subtle">
+                        <div class="card-img-placeholder">Thumbnail</div>
+                        <div class="card-body p-3">
+                            <p class="card-text text-secondary mb-4">
+                                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary px-3">View</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary px-3">Edit</button>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Автономный скрипт для выпадающего меню -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var btn = document.getElementById('dropdownUser');
+            if (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var menu = btn.nextElementSibling;
+                    if (menu) {
+                        menu.classList.toggle('show');
+                        var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+                        btn.setAttribute('aria-expanded', !isExpanded);
+                    }
+                });
+
+                document.addEventListener('click', function (e) {
+                    if (!btn.contains(e.target)) {
+                        var menu = btn.nextElementSibling;
+                        if (menu && menu.classList.contains('show')) {
+                            menu.classList.remove('show');
+                            btn.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
