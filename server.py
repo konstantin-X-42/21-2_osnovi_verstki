@@ -1,135 +1,93 @@
-from http.server import HTTPServer, BaseHTTPRequestHandler
-import urllib.parse
+from http.server import BaseHTTPRequestHandler, HTTPServer
+import os
+from urllib.parse import parse_qs
 
 
 class MyWebServer(BaseHTTPRequestHandler):
 
+    # 1. Этот метод отвечает за отображение самой страницы (как и раньше)
     def do_GET(self):
-        # ЗАДАНИЕ 2: На ЛЮБОЙ GET-запрос возвращаем страницу «Контакты»
+        html_filename = "21-2_home4.html"
+
+        if not os.path.exists(html_filename):
+            self.send_response(404)
+            self.send_header("Content-type", "text/plain; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(f"Ошибка: Файл '{html_filename}' не найден!".encode("utf-8"))
+            return
+
         self.send_response(200)
-        self.send_header('Content-Type', 'text/html; charset=utf-8')
+        self.send_header("Content-type", "text/html; charset=utf-8")
         self.end_headers()
 
-        # Содержимое для отправки читаем из HTML-файла через with open()
-        filename = '21-2_home4.html'
-        with open(filename, 'r', encoding='utf-8') as f:
-            content = f.read()
-            self.wfile.write(bytes(content, 'utf-8'))
+        with open(html_filename, "r", encoding="utf-8") as file:
+            html_content = file.read()
 
+        self.wfile.write(bytes(html_content, "utf-8"))
+
+    # 2. НОВЫЙ МЕТОД: Обрабатывает отправку формы контактов
     def do_POST(self):
-        # Обработка POST-запроса от формы
-        if self.path == '/submit-contacts':
+        if self.path == "/submit-contacts":
+            # Определяем длину входящих данных
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length).decode('utf-8')
 
-            parsed_data = urllib.parse.parse_qs(post_data)
+            # Парсим полученные из полей формы данные
+            parsed_data = parse_qs(post_data)
 
-            print("\n--- Получены данные из формы Контакты ---")
-            print(f"Имя: {parsed_data.get('name', [''])}")
-            print(f"Почта: {parsed_data.get('email', [''])}")
-            print(f"Сообщение: {parsed_data.get('message', [''])}")
-            print("-------------------------------------------\n")
+            # Получаем чистые значения полей (из тегов name="name", name="email" и т.д.)
+            user_name = parsed_data.get('name', [''])[0]
+            user_email = parsed_data.get('email', [''])[0]
+            user_message = parsed_data.get('message', [''])[0]
 
-            # Перенаправляем обратно на контакты
-            self.send_response(303)
-            self.send_header('Location', '/')
+            # Выводим полученные данные в терминал PyCharm для проверки
+            print("\n" + "=" * 30)
+            print("ПОЛУЧЕНЫ ДАННЫЕ ИЗ ФОРМЫ:")
+            print(f"Имя: {user_name}")
+            print(f"Почта: {user_email}")
+            print(f"Сообщение: {user_message}")
+            print("=" * 30 + "\n")
+
+            # Отправляем ответ пользователю об успешной отправке
+            self.send_response(200)
+            self.send_header("Content-type", "text/html; charset=utf-8")
             self.end_headers()
 
+            # Создаем простую HTML-страничку ответа с кнопкой возврата назад
+            success_html = f"""
+            <!DOCTYPE html>
+            <html lang="ru">
+            <head>
+                <meta charset="UTF-8">
+                <title>Успешно отправлено</title>
+                <link href="https://jsdelivr.net" rel="stylesheet">
+            </head>
+            <body class="bg-light d-flex align-items-center justify-content-center" style="height: 100vh;">
+                <div class="card p-5 shadow-sm text-center" style="max-width: 500px;">
+                    <div class="text-success display-1 mb-3">✓</div>
+                    <h2 class="fw-normal mb-3">{user_name}, спасибо!</h2>
+                    <p class="text-secondary mb-4">Ваше сообщение успешно отправлено на сервер.</p>
+                    <a href="/" class="btn btn-primary px-4">Назад к контактам</a>
+                </div>
+            </body>
+            </html>
+            """
+            self.wfile.write(bytes(success_html, "utf-8"))
 
-def run(server_class=HTTPServer, handler_class=MyWebServer):
-    server_address = ('', 8000)
-    httpd = server_class(server_address, handler_class)
-    print("Сервер запущен на http://localhost:8000/")
-    httpd.serve_forever()
+
+def run(port=8000):
+    server_address = ('', port)
+    httpd = HTTPServer(server_address, MyWebServer)
+    print(f"==================================================")
+    print(f" Сервер перезапущен и готов к обработке форм!")
+    print(f" Откройте в браузере ссылку: http://localhost:{port}")
+    print(f"==================================================")
+
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("\nСервер остановлен.")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run()
-
-# from http.server import HTTPServer, BaseHTTPRequestHandler
-# import urllib.parse
-# import os
-#
-#
-# class MyWebServer(BaseHTTPRequestHandler):
-#
-#     def do_GET(self):
-#         # 1. ОБРАБОТКА СТИЛЕЙ (Исправляет ошибку 404 для CSS-файлов)
-#         if self.path == '/style.css' or self.path == '/css/bootstrap.min.css':
-#             # Убираем начальный слэш, чтобы получить корректный локальный путь к файлу
-#             local_path = self.path.lstrip('/')
-#
-#             if os.path.exists(local_path):
-#                 self.send_response(200)
-#                 self.send_header('Content-Type', 'text/css; charset=utf-8')
-#                 self.end_headers()
-#                 # Читаем стили с помощью контекстного менеджера
-#                 with open(local_path, 'r', encoding='utf-8') as f:
-#                     self.wfile.write(bytes(f.read(), 'utf-8'))
-#                 return
-#             else:
-#                 self.send_error(404, f"CSS File Not Found: {local_path}")
-#                 return
-#
-#         # 2. МАРШРУТИЗАЦИЯ HTML СТРАНИЦ
-#         if self.path == '/' or self.path == '/21-2_home1.html':
-#             filename = '21-2_home1.html'
-#         elif self.path == '/21-2_home2.html':
-#             filename = '21-2_home2.html'
-#         elif self.path == '/21-2_home3.html':
-#             filename = '21-2_home3.html'
-#         elif self.path == '/21-2_home4.html':
-#             filename = '21-2_home4.html'
-#         else:
-#             # Реализация дополнительного функционала: страница 404 (Критерий №4)
-#             self.send_response(404)
-#             self.send_header('Content-Type', 'text/html; charset=utf-8')
-#             self.end_headers()
-#             self.wfile.write(b"<h1>404 Not Found</h1><p>Izvinite, takoy stranici net.</p>")
-#             return
-#
-#         # Успешный ответ HTML (Критерий №5)
-#         try:
-#             self.send_response(200)
-#             self.send_header('Content-Type', 'text/html; charset=utf-8')
-#             self.end_headers()
-#
-#             # Чтение файла с помощью контекстного менеджера (Критерий №6)
-#             with open(filename, 'r', encoding='utf-8') as f:
-#                 content = f.read()
-#                 self.wfile.write(bytes(content, 'utf-8'))
-#         except FileNotFoundError:
-#             self.send_error(500, "Internal Server Error: File not found")
-#
-#     def do_POST(self):
-#         # Сервер принимает POST-запрос (Критерий №7)
-#         if self.path == '/submit-contacts':
-#             content_length = int(self.headers['Content-Length'])
-#             post_data = self.rfile.read(content_length).decode('utf-8')
-#
-#             # Парсим полученные из формы данные
-#             parsed_data = urllib.parse.parse_qs(post_data)
-#
-#             # Выводим данные в консоль без ошибок (Критерий №7)
-#             print("\n--- Получены данные из формы Контакты ---")
-#             print(f"Имя: {parsed_data.get('name', [''])[0]}")
-#             print(f"Почта: {parsed_data.get('email', [''])[0]}")
-#             print(f"Сообщение: {parsed_data.get('message', [''])[0]}")
-#             print("-------------------------------------------\n")
-#
-#             # Перенаправляем обратно на страницу контактов после отправки
-#             self.send_response(303)
-#             self.send_header('Location', '/21-2_home4.html')
-#             self.end_headers()
-#
-#
-# # Запуск сервера на порту 8000
-# def run(server_class=HTTPServer, handler_class=MyWebServer):
-#     server_address = ('', 8000)
-#     httpd = server_class(server_address, handler_class)
-#     print("Сервер запущен на http://localhost:8000/")
-#     httpd.serve_forever()
-#
-#
-# if __name__ == '__main__':
-#     run()

@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контакты - Магазин</title>
-    <!-- Подключаем Bootstrap CSS с удаленного репозитория (CDN) -->
+
+    <!-- Подключение Bootstrap CSS и Иконок из удаленного репозитория -->
     <link href="https://jsdelivr.net" rel="stylesheet">
-    <!-- Подключаем Иконки Bootstrap с удаленного репозитория (CDN) -->
     <link href="https://jsdelivr.net" rel="stylesheet">
 
-    <!-- Стили -->
+    <!-- Автономные Bootstrap-стили, которые гарантированно загрузятся в любом браузере -->
     <style>
+        /* Базовые настройки страницы */
         body {
             background-color: #ffffff;
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
         }
+
+        /* Сайдбар строго по макету */
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -22,309 +28,225 @@
             left: 0;
             background-color: #1e2125;
             z-index: 100;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
         }
+
+        /* Основной контент с правильным отступом */
         .main-content {
             margin-left: 250px;
             padding: 40px;
+            flex-grow: 1;
+            box-sizing: border-box;
         }
-        .nav-link.active-custom {
-            background-color: #2f6bf2 !important;
-            color: white !important;
-            border-radius: 6px;
+
+        /* Заголовок по центру */
+        .text-center {
+            text-align: center;
+        }
+        .display-5 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-top: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Навигация (меню) */
+        .nav {
+            display: flex;
+            flex-direction: column;
+            padding-left: 0;
+            margin-bottom: auto;
+            list-style: none;
+            gap: 5px;
         }
         .nav-link-custom {
             color: #adb5bd;
             padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-size: 1rem;
         }
         .nav-link-custom:hover {
             color: white;
             background-color: rgba(255,255,255,0.05);
             border-radius: 6px;
         }
-        .dropup .dropdown-menu.show {
-            top: auto !important;
-            bottom: 100% !important;
-            margin-bottom: 10px !important;
+        .nav-link.active-custom {
+            background-color: #2f6bf2 !important;
+            color: white !important;
+            border-radius: 6px;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
         }
+
+        /* Сетка для формы и текста */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+        .col-form {
+            flex: 0 0 auto;
+            width: 100%;
+            max-width: 450px;
+        }
+        .col-text {
+            flex: 0 0 auto;
+            width: 100%;
+            max-width: 550px;
+        }
+
+        /* Карточка формы обратной связи */
+        .form-card {
+            padding: 24px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+            background-color: #fff;
+        }
+        .mb-3 { margin-bottom: 1rem; }
+        .mb-4 { margin-bottom: 1.5rem; }
+        .form-label {
+            display: block;
+            margin-bottom: .5rem;
+            color: #6c757d;
+            font-size: .875rem;
+            font-weight: 500;
+        }
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            color: #212529;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: .375rem;
+            box-sizing: border-box;
+        }
+
+        /* Поле ввода почты с префиксом @ */
+        .input-group {
+            display: flex;
+            width: 100%;
+        }
+        .input-group-text {
+            display: flex;
+            align-items: center;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            color: #6c757d;
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: .375rem 0 0 .375rem;
+            border-end-0: 0;
+        }
+        .input-group .form-control {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        /* Кнопка */
+        .btn-primary {
+            color: #fff;
+            background-color: #2f6bf2;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .btn-primary:hover {
+            background-color: #1b52cf;
+        }
+
+        /* Стили текста справа */
+        .h4 { font-size: 1.5rem; font-weight: 700; margin-top: 0; margin-bottom: 1rem; }
+        .text-secondary { color: #6c757d; }
+        .lh-lg { line-height: 2; }
+
+        /* Разделители и аватарка */
+        hr { margin: 15px 0; border: 0; border-top: 1px solid rgba(255,255,255,0.15); }
+        .user-block { display: flex; align-items: center; color: white; text-decoration: none; font-size: 1rem; }
+        .rounded-circle { border-radius: 50%; margin-right: 10px; }
     </style>
 </head>
-
 <body>
-    <!-- SIDEBAR -->
-    <div class="sidebar d-flex flex-column p-3 text-white">
-        <a href="21-2_home1.html" class="d-flex align-items-center mb-4 me-md-auto text-white text-decoration-none fs-5 fw-semibold">
-            <i class="bi bi-bootstrap-fill me-2 fs-4"></i> Меню
-        </a>
-        <hr class="opacity-25 my-1">
 
-        <ul class="nav nav-pills flex-column mb-auto gap-1 pt-2">
-            <li class="nav-item">
-                <a href="21-2_home1.html" class="nav-link nav-link-custom d-flex align-items-center gap-2">
-                    <i class="bi bi-house-door"></i> Главная
-                </a>
-            </li>
-            <li>
-                <a href="21-2_home2.html" class="nav-link nav-link-custom d-flex align-items-center gap-2">
-                    <i class="bi bi-grid"></i> Категории
-                </a>
-            </li>
-            <li>
-                <a href="21-2_home3.html" class="nav-link nav-link-custom d-flex align-items-center gap-2">
-                    <i class="bi bi-card-list"></i> Заказы
-                </a>
-            </li>
-            <li>
-                <!-- АКТИВНАЯ ССЫЛКА НА ЧЕТВЕРТОЙ СТРАНИЦЕ (Подсвечена синим) -->
-                <a href="21-2_home4.html" class="nav-link active-custom d-flex align-items-center gap-2">
-                    <i class="bi bi-telephone-fill"></i> Контакты
-                </a>
-            </li>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <a href="#" style="color: white; text-decoration: none; font-size: 1.25rem; font-weight: 600; margin-bottom: 20px; display: block;">
+            <i class="bi bi-bootstrap-fill me-2 fs-4"></i> МЕНЮ
+        </a>
+        <hr>
+
+        <ul class="nav">
+            <li><a href="#" class="nav-link nav-link-custom"><i class="bi bi-house-door me-2"></i>Главная</a></li>
+            <li><a href="#" class="nav-link nav-link-custom"><i class="bi bi-grid me-2"></i>Категории</a></li>
+            <li><a href="#" class="nav-link nav-link-custom"><i class="bi bi-card-list me-2"></i>Заказы</a></li>
+            <li><a href="#" class="nav-link active-custom"><i class="bi bi-telephone-fill me-2"></i>Контакты</a></li>
         </ul>
 
-        <hr class="opacity-25 mb-3">
+        <hr style="margin-top: auto;">
 
-        <div class="dropup">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://i.pinimg.com/236x/71/8f/52/718f525283d54acddfeec21fa9e93a16.jpg" alt="mdo" width="32" height="32" class="rounded-circle me-2">
-                <strong>Пользователь</strong>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
-                <li><a class="dropdown-item py-2" href="#">Профиль</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item py-2 text-danger" href="#">Выход</a></li>
-            </ul>
+        <div class="user-block">
+            <img src="https://pinimg.com" alt="user" width="32" height="32" class="rounded-circle">
+            <strong>Пользователь</strong>
         </div>
     </div>
 
-    <!-- MAIN CONTENT Контакты -->
+    <!-- MAIN CONTENT -->
     <div class="main-content">
-        <div class="container-fluid">
+        <h1 class="display-5 text-center">Контакты</h1>
 
-            <h1 class="display-5 text-center fw-normal mt-4 mb-5">Контакты</h1>
+        <div class="row">
+            <!-- Левая колонка: Форма обратной связи -->
+            <div class="col-form">
+                <div class="form-card">
+                    <form action="/submit-contacts" method="POST">
+                        <div class="mb-3">
+                            <label for="inputName" class="form-label">Имя</label>
+                            <input type="text" class="form-control" id="inputName" name="name" required>
+                        </div>
 
-            <div class="row g-5 justify-content-center align-items-start mt-2">
-
-                <!-- Левая колонка: Форма обратной связи -->
-                <div class="col-10 col-md-5">
-                    <div class="p-4 border border-light-subtle rounded-3 shadow-sm bg-white">
-                        <!-- ИСПРАВЛЕНО: Добавлены action="/submit-contacts" и method="POST" для связи с сервером Python -->
-                        <form action="/submit-contacts" method="POST">
-                            <div class="mb-3">
-                                <label for="inputName" class="form-label text-secondary small fw-medium">Имя</label>
-                                <!-- ИСПРАВЛЕНО: Добавлен атрибут name="name" -->
-                                <input type="text" class="form-control" id="inputName" name="name">
+                        <div class="mb-3">
+                            <label for="inputEmail" class="form-label">Почта</label>
+                            <div class="input-group">
+                                <span class="input-group-text">@</span>
+                                <input type="email" class="form-control" id="inputEmail" name="email" required>
                             </div>
+                        </div>
 
-                            <div class="mb-3">
-                                <label for="inputEmail" class="form-label text-secondary small fw-medium">Почта</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-light border-end-0 text-muted" id="basic-addon1">@</span>
-                                    <!-- ИСПРАВЛЕНО: Добавлен атрибут name="email" -->
-                                    <input type="email" class="form-control border-start-0" id="inputEmail" aria-describedby="basic-addon1" name="email">
-                                </div>
-                            </div>
+                        <div class="mb-4">
+                            <label for="inputText" class="form-label">Сообщение</label>
+                            <textarea class="form-control" id="inputText" name="message" rows="4" required></textarea>
+                        </div>
 
-                            <div class="mb-4">
-                                <label for="inputText" class="form-label text-secondary small fw-medium">Сообщение</label>
-                                <!-- ИСПРАВЛЕНО: Добавлен атрибут name="message" -->
-                                <textarea class="form-control" id="inputText" rows="4" name="message"></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary px-4 py-2 rounded-2">Отправить</button>
-                        </form>
-                    </div>
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
                 </div>
+            </div>
 
-                <!-- Правая колонка: Текстовый блок -->
-                <div class="col-10 col-md-6">
-                    <div class="ps-md-4">
-                        <h3 class="h4 fw-bold mb-3">Наши контакты</h3>
-                        <p class="text-secondary lh-lg mb-4">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <p class="text-secondary lh-lg">
-                            While these feedback styles cannot be styled with CSS, you can still customize the feedback text through JavaScript.
-                        </p>
-                    </div>
-                </div>
-
+            <!-- Правая колонка: Текстовый блок -->
+            <div class="col-text">
+                <h3 class="h4">Наши контакты</h3>
+                <p class="text-secondary lh-lg mb-4">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                </p>
+                <p class="text-secondary lh-lg">
+                    While these feedback styles cannot be styled with CSS, you can still customize the feedback text through JavaScript.
+                </p>
             </div>
         </div>
     </div>
 
-    <!-- Автономный скрипт для выпадающего меню -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var btn = document.getElementById('dropdownUser');
-            if (btn) {
-                btn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    var menu = btn.nextElementSibling;
-                    if (menu) {
-                        menu.classList.toggle('show');
-                        var isExpanded = btn.getAttribute('aria-expanded') === 'true';
-                        btn.setAttribute('aria-expanded', !isExpanded);
-                    }
-                });
-
-                document.addEventListener('click', function (e) {
-                    if (!btn.contains(e.target)) {
-                        var menu = btn.nextElementSibling;
-                        if (menu && menu.classList.contains('show')) {
-                            menu.classList.remove('show');
-                            btn.setAttribute('aria-expanded', 'false');
-                        }
-                    }
-                });
-            }
-        });
-    </script>
+    <!-- Добавляем скрипт Bootstrap для корректной работы интерактива -->
+    <script src="https://jsdelivr.net"></script>
 </body>
 </html>
-
-
-
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="ru">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>Контакты - Магазин</title>-->
-<!--    &lt;!&ndash; Локальный Bootstrap &ndash;&gt;-->
-<!--    <link href="css/bootstrap.min.css" rel="stylesheet">-->
-<!--    &lt;!&ndash; Интернет-ссылка на иконки Bootstrap &ndash;&gt;-->
-<!--    <link href="https://jsdelivr.net" rel="stylesheet">-->
-<!--    &lt;!&ndash; Импорт стилей из отдельного файла  &ndash;&gt;-->
-<!--    <link href="style.css" rel="stylesheet">-->
-<!--</head>-->
-<!--<body>-->
-<!--    &lt;!&ndash; SIDEBAR &ndash;&gt;-->
-<!--    <div class="sidebar d-flex flex-column p-3 text-white">-->
-<!--        <a href="21-2_home1.html" class="d-flex align-items-center mb-4 me-md-auto text-white text-decoration-none fs-5 fw-semibold">-->
-<!--            <i class="bi bi-bootstrap-fill me-2 fs-4"></i> Меню-->
-<!--        </a>-->
-<!--        <hr class="opacity-25 my-1">-->
-
-<!--        <ul class="nav nav-pills flex-column mb-auto gap-1 pt-2">-->
-<!--            <li class="nav-item">-->
-<!--                <a href="21-2_home1.html" class="nav-link nav-link-custom d-flex align-items-center gap-2">-->
-<!--                    <i class="bi bi-house-door"></i> Главная-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="21-2_home2.html" class="nav-link nav-link-custom d-flex align-items-center gap-2">-->
-<!--                    <i class="bi bi-grid"></i> Категории-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <a href="21-2_home3.html" class="nav-link nav-link-custom d-flex align-items-center gap-2">-->
-<!--                    <i class="bi bi-card-list"></i> Заказы-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                &lt;!&ndash; АКТИВНАЯ ССЫЛКА НА ЧЕТВЕРТОЙ СТРАНИЦЕ (Подсвечена синим) &ndash;&gt;-->
-<!--                <a href="21-2_home4.html" class="nav-link active-custom d-flex align-items-center gap-2">-->
-<!--                    <i class="bi bi-telephone-fill"></i> Контакты-->
-<!--                </a>-->
-<!--            </li>-->
-<!--        </ul>-->
-
-<!--        <hr class="opacity-25 mb-3">-->
-
-<!--        <div class="dropup">-->
-<!--            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                <img src="https://i.pinimg.com/236x/71/8f/52/718f525283d54acddfeec21fa9e93a16.jpg" alt="mdo" width="32" height="32" class="rounded-circle me-2">-->
-<!--                <strong>Пользователь</strong>-->
-<!--            </a>-->
-<!--            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">-->
-<!--                <li><a class="dropdown-item py-2" href="#">Профиль</a></li>-->
-<!--                <li><hr class="dropdown-divider"></li>-->
-<!--                <li><a class="dropdown-item py-2 text-danger" href="#">Выход</a></li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; MAIN CONTENT Контакты &ndash;&gt;-->
-<!--    <div class="main-content">-->
-<!--        <div class="container-fluid">-->
-
-<!--            <h1 class="display-5 text-center fw-normal mt-4 mb-5">Контакты</h1>-->
-
-<!--            <div class="row g-5 justify-content-center align-items-start mt-2">-->
-
-<!--                &lt;!&ndash; Левая колонка: Форма обратной связи &ndash;&gt;-->
-<!--                <div class="col-10 col-md-5">-->
-<!--                    <div class="p-4 border border-light-subtle rounded-3 shadow-sm bg-white">-->
-<!--                        <form>-->
-<!--                            <div class="mb-3">-->
-<!--                                <label for="inputName" class="form-label text-secondary small fw-medium">Имя</label>-->
-<!--                                <input type="text" class="form-control" id="inputName">-->
-<!--                            </div>-->
-
-<!--                            <div class="mb-3">-->
-<!--                                <label for="inputEmail" class="form-label text-secondary small fw-medium">Почта</label>-->
-<!--                                <div class="input-group">-->
-<!--                                    <span class="input-group-text bg-light border-end-0 text-muted" id="basic-addon1">@</span>-->
-<!--                                    <input type="email" class="form-control border-start-0" id="inputEmail" aria-describedby="basic-addon1">-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            <div class="mb-4">-->
-<!--                                <label for="inputText" class="form-label text-secondary small fw-medium">Сообщение</label>-->
-<!--                                <textarea class="form-control" id="inputText" rows="4"></textarea>-->
-<!--                            </div>-->
-
-<!--                            <button type="submit" class="btn btn-primary px-4 py-2 rounded-2">Отправить</button>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                &lt;!&ndash; Правая колонка: Текстовый блок &ndash;&gt;-->
-<!--                <div class="col-10 col-md-6">-->
-<!--                    <div class="ps-md-4">-->
-<!--                        <h3 class="h4 fw-bold mb-3">Наши контакты</h3>-->
-<!--                        <p class="text-secondary lh-lg mb-4">-->
-<!--                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.-->
-<!--                        </p>-->
-<!--                        <p class="text-secondary lh-lg">-->
-<!--                            While these feedback styles cannot be styled with CSS, you can still customize the feedback text through JavaScript.-->
-<!--                        </p>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; Автономный скрипт для выпадающего меню &ndash;&gt;-->
-<!--    <script>-->
-<!--        document.addEventListener('DOMContentLoaded', function () {-->
-<!--            var btn = document.getElementById('dropdownUser');-->
-<!--            if (btn) {-->
-<!--                btn.addEventListener('click', function (e) {-->
-<!--                    e.preventDefault();-->
-<!--                    var menu = btn.nextElementSibling;-->
-<!--                    if (menu) {-->
-<!--                        menu.classList.toggle('show');-->
-<!--                        var isExpanded = btn.getAttribute('aria-expanded') === 'true';-->
-<!--                        btn.setAttribute('aria-expanded', !isExpanded);-->
-<!--                    }-->
-<!--                });-->
-
-<!--                document.addEventListener('click', function (e) {-->
-<!--                    if (!btn.contains(e.target)) {-->
-<!--                        var menu = btn.nextElementSibling;-->
-<!--                        if (menu && menu.classList.contains('show')) {-->
-<!--                            menu.classList.remove('show');-->
-<!--                            btn.setAttribute('aria-expanded', 'false');-->
-<!--                        }-->
-<!--                    }-->
-<!--                });-->
-<!--            }-->
-<!--        });-->
-<!--    </script>-->
-<!--</body>-->
-<!--</html>-->

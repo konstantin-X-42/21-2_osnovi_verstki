@@ -10,6 +10,7 @@ body {
     background-color: #1e2125;
     z-index: 100;
 }
+/* Отступ для контента, чтобы он не заходил под меню */
 .main-content {
     margin-left: 250px;
     padding: 40px;
@@ -19,6 +20,7 @@ body {
     color: white !important;
     border-radius: 6px;
 }
+/* Кастомные стили для ссылок */
 .nav-link-custom {
     color: #adb5bd;
     padding: 10px 15px;
