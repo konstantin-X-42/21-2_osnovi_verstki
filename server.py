@@ -44,7 +44,7 @@ class MyWebServer(BaseHTTPRequestHandler):
             user_email = parsed_data.get('email', ['Не указано'])[0]
             user_message = parsed_data.get('message', ['Не указано'])[0]
 
-            # ВЫВОД В КОНСОЛЬ ПАЙЧАРМ (Обязательно напечатается)
+            # ВЫВОД В КОНСОЛЬ ПАЙЧАРМ
             print("\n" + "=" * 40)
             print(" УСПЕШНО ПОЛУЧЕНЫ ДАННЫЕ ИЗ ФОРМЫ:")
             print(f" Имя пользователя: {user_name}")
@@ -82,7 +82,7 @@ def run(port=8000):
     server_address = ('', port)
     httpd = HTTPServer(server_address, MyWebServer)
     print(f"==================================================")
-    print(f" Умный сервер успешно перезапущен!")
+    print(f" Сервер успешно перезапущен!")
     print(f" Откройте в браузере: http://localhost:{port}")
     print(f"==================================================")
     try:
