@@ -3,201 +3,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Категория 1 - Магазин</title>
-    <!-- Локальный Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Интернет-ссылка на иконки Bootstrap -->
+    <title>Категории - Магазин</title>
+
+    <!-- Полные рабочие ссылки на Иконки Bootstrap из удаленного репозитория -->
     <link href="https://jsdelivr.net" rel="stylesheet">
-    <!-- Импорт ваших стилей из отдельного файла  -->
-    <link href="style.css" rel="stylesheet">
+
+    <style>
+        /* Базовые настройки страницы */
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Сайдбар зафиксирован слева */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #1e2125;
+            z-index: 9999;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Основной контент с правильным отступом */
+        .main-content {
+            margin-left: 250px;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .text-center { text-align: center; }
+        .text-muted { color: #6c757d; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-3 { margin-bottom: 1rem; }
+        .mb-4 { margin-bottom: 1.5rem; }
+        .mb-5 { margin-bottom: 3rem; }
+        .mt-4 { margin-top: 1.5rem; }
+
+        .display-5 {
+            font-size: 2.5rem;
+            font-weight: 400;
+        }
+
+        /* Навигация (меню) */
+        .nav {
+            display: flex;
+            flex-direction: column;
+            padding-left: 0;
+            margin-bottom: auto;
+            list-style: none;
+            gap: 5px;
+        }
+        .nav-link-custom {
+            color: #adb5bd;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-size: 1rem;
+        }
+        .nav-link-custom:hover {
+            color: white;
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 6px;
+        }
+        .active-custom {
+            background-color: #2f6bf2 !important;
+            color: white !important;
+            border-radius: 6px;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+        }
+
+        hr { margin: 15px 0; border: 0; border-top: 1px solid rgba(255,255,255,0.15); }
+        .rounded-circle { border-radius: 50%; }
+
+        /* ДВУХКОЛОНОЧНАЯ СЕТКА КАТАЛОГА (СТРОГО ПО МАКЕТУ) */
+        .catalog-grid {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .catalog-col {
+            flex: 1 1 450px;
+            max-width: 480px;
+            box-sizing: border-box;
+        }
+
+        /* Стили больших карточек с Thumbnail */
+        .catalog-card {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.05);
+        }
+        .thumbnail-box {
+            background-color: #6c757d;
+            color: #dee2e6;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        .catalog-body {
+            padding: 20px;
+            text-align: left;
+        }
+        .catalog-text {
+            font-size: 0.95rem;
+            color: #212529;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* Кнопки и таймер внизу карточки */
+        .catalog-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .btn-group {
+            display: flex;
+        }
+        .btn-card {
+            background-color: #fff;
+            color: #6c757d;
+            border: 1px solid #6c757d;
+            padding: 6px 12px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-view {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            border-right: none;
+        }
+        .btn-edit {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+        .btn-card:hover {
+            background-color: #6c757d;
+            color: #fff;
+        }
+        .time-text {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        /* СТИЛИ ДЛЯ ВЫКАТНОГО МЕНЮ ПОЛЬЗОВАТЕЛЯ */
+        .custom-dropup-menu {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            margin-bottom: 12px;
+            background-color: #343a40;
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 5px 0;
+            border-radius: 8px;
+            list-style: none;
+            min-width: 160px;
+            z-index: 99999;
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.175);
+        }
+        .custom-dropup-item {
+            color: #ffffff;
+            text-decoration: none;
+            display: block;
+            padding: 8px 16px;
+            font-size: 0.95rem;
+        }
+        .custom-dropup-item:hover { background-color: rgba(255,255,255,0.08); }
+        .custom-dropup-divider { margin: 5px 0; border-top: 1px solid rgba(255,255,255,0.15); }
+
+        .user-container-block {
+            color: #ffffff !important;
+            text-decoration: none !important;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            padding: 5px 0;
+        }
+        .user-container-block::after {
+            display: inline-block;
+            margin-left: .255em;
+            vertical-align: .255em;
+            content: "";
+            border-top: 0;
+            border-right: .3em solid transparent;
+            border-bottom: .3em solid;
+            border-left: .3em solid transparent;
+        }
+    </style>
 </head>
 <body>
-    <!-- SIDEBAR -->
-    <div class="sidebar d-flex flex-column p-3 text-white">
-        <a href="21-2_home1.html" class="d-flex align-items-center mb-4 me-md-auto text-white text-decoration-none fs-5 fw-semibold">
-            <i class="bi bi-bootstrap-fill me-2 fs-4"></i> Меню
-        </a>
-        <hr class="opacity-25 my-1">
 
-        <ul class="nav nav-pills flex-column mb-auto gap-1 pt-2">
-            <li class="nav-item">
-                <a href="21-2_home1.html" class="nav-link nav-link-custom d-flex align-items-center gap-2">
-                    <i class="bi bi-house-door"></i> Главная
-                </a>
-            </li>
-            <li>
-                <a href="21-2_home2.html" class="nav-link nav-link-custom d-flex align-items-center gap-2">
-                    <i class="bi bi-grid"></i> Категории
-                </a>
-            </li>
-            <li>
-                <!-- АКТИВНАЯ ССЫЛКА НА ТРЕТЬЕЙ СТРАНИЦЕ -->
-                <a href="21-2_home3.html" class="nav-link active-custom d-flex align-items-center gap-2">
-                    <i class="bi bi-card-list"></i> Заказы
-                </a>
-            </li>
-            <li>
-                <a href="21-2_home4.html" class="nav-link nav-link-custom d-flex align-items-center gap-2">
-                    <i class="bi bi-telephone"></i> Контакты
-                </a>
-            </li>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <a href="21-2_home1.html" style="color: white; text-decoration: none; font-size: 1.25rem; font-weight: 600; margin-bottom: 20px; display: block;">
+            МЕНЮ
+        </a>
+        <hr>
+
+        <ul class="nav">
+            <!-- НАВИГАЦИЯ: Ссылки ведут на файлы страниц -->
+            <!-- Кнопка Главная открывает страницу 1 -->
+            <li><a href="21-2_home1.html" class="nav-link nav-link-custom"><i class="bi bi-house-door me-2"></i>Главная</a></li>
+            <!-- Кнопка Категории открывает страницу 2 -->
+            <li><a href="#" class="nav-link nav-link-custom"><i class="bi bi-grid me-2"></i>Категории</a></li>
+            <!-- Кнопка Заказы (Активная) открывает страницу 3 Каталог -->
+            <li><a href="21-2_home3.html" class="nav-link active-custom"><i class="bi bi-card-list-fill me-2"></i>Заказы</a></li>
+            <!-- Кнопка Контакты открывает страницу 4 -->
+            <li><a href="21-2_home4.html" class="nav-link nav-link-custom"><i class="bi bi-telephone me-2"></i>Контакты</a></li>
+
         </ul>
 
-        <hr class="opacity-25 mb-3">
+        <hr style="margin-top: auto;">
 
-        <div class="dropup">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://i.pinimg.com/236x/71/8f/52/718f525283d54acddfeec21fa9e93a16.jpg" alt="mdo" width="32" height="32" class="rounded-circle me-2">
-                <strong>Пользователь</strong>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
-                <li><a class="dropdown-item py-2" href="#">Профиль</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item py-2 text-danger" href="#">Выход</a></li>
+        <!-- БЛОК ПОЛЬЗОВАТЕЛЯ -->
+        <div style="position: relative;">
+            <!-- Всплывающая серая табличка (По умолчанию скрыта) -->
+            <ul class="custom-dropup-menu" id="dropdownMenu">
+                <li><a class="custom-dropup-item" href="#">Профиль</a></li>
+                <li><div class="custom-dropup-divider"></div></li>
+                <li><a class="custom-dropup-item" href="#" style="color: #ea868f;">Выход</a></li>
             </ul>
-        </div>
 
-    </div>
-
-    <!-- MAIN CONTENT (Категория 1) -->
-    <div class="main-content">
-        <div class="container-fluid text-center">
-
-            <h1 class="display-5 fw-normal mt-4 mb-5">Категория 1</h1>
-
-            <!-- Сетка карточек товаров (3 колонки в ряд на средних и больших экранах) -->
-            <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
-
-                <!-- Товар 1 -->
-                <div class="col" style="max-width: 320px;">
-                    <div class="card h-100 shadow-sm border-light-subtle rounded-3">
-                        <div class="card-header bg-light py-3 border-bottom-0">
-                            <h4 class="my-0 fw-normal fs-5 text-muted">Товар 1</h4>
-                        </div>
-                        <div class="card-body px-4 pb-4">
-                            <h1 class="card-title pricing-card-title mb-4">$ 100</h1>
-                            <ul class="list-unstyled text-muted small lh-lg mb-4">
-                                <li>10 users included, 2 GB of storage,</li>
-                                <li>Email support, Help center access</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-outline-primary py-2 rounded-2">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 2 -->
-                <div class="col" style="max-width: 320px;">
-                    <div class="card h-100 shadow-sm border-light-subtle rounded-3">
-                        <div class="card-header bg-light py-3 border-bottom-0">
-                            <h4 class="my-0 fw-normal fs-5 text-muted">Товар 1</h4>
-                        </div>
-                        <div class="card-body px-4 pb-4">
-                            <h1 class="card-title pricing-card-title mb-4">$ 100</h1>
-                            <ul class="list-unstyled text-muted small lh-lg mb-4">
-                                <li>10 users included, 2 GB of storage,</li>
-                                <li>Email support, Help center access</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-outline-primary py-2 rounded-2">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 3 -->
-                <div class="col" style="max-width: 320px;">
-                    <div class="card h-100 shadow-sm border-light-subtle rounded-3">
-                        <div class="card-header bg-light py-3 border-bottom-0">
-                            <h4 class="my-0 fw-normal fs-5 text-muted">Товар 1</h4>
-                        </div>
-                        <div class="card-body px-4 pb-4">
-                            <h1 class="card-title pricing-card-title mb-4">$ 100</h1>
-                            <ul class="list-unstyled text-muted small lh-lg mb-4">
-                                <li>10 users included, 2 GB of storage,</li>
-                                <li>Email support, Help center access</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-outline-primary py-2 rounded-2">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 4 -->
-                <div class="col" style="max-width: 320px;">
-                    <div class="card h-100 shadow-sm border-light-subtle rounded-3">
-                        <div class="card-header bg-light py-3 border-bottom-0">
-                            <h4 class="my-0 fw-normal fs-5 text-muted">Товар 1</h4>
-                        </div>
-                        <div class="card-body px-4 pb-4">
-                            <h1 class="card-title pricing-card-title mb-4">$ 100</h1>
-                            <ul class="list-unstyled text-muted small lh-lg mb-4">
-                                <li>10 users included, 2 GB of storage,</li>
-                                <li>Email support, Help center access</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-outline-primary py-2 rounded-2">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 5 -->
-                <div class="col" style="max-width: 320px;">
-                    <div class="card h-100 shadow-sm border-light-subtle rounded-3">
-                        <div class="card-header bg-light py-3 border-bottom-0">
-                            <h4 class="my-0 fw-normal fs-5 text-muted">Товар 1</h4>
-                        </div>
-                        <div class="card-body px-4 pb-4">
-                            <h1 class="card-title pricing-card-title mb-4">$ 100</h1>
-                            <ul class="list-unstyled text-muted small lh-lg mb-4">
-                                <li>10 users included, 2 GB of storage,</li>
-                                <li>Email support, Help center access</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-outline-primary py-2 rounded-2">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Товар 6 -->
-                <div class="col" style="max-width: 320px;">
-                    <div class="card h-100 shadow-sm border-light-subtle rounded-3">
-                        <div class="card-header bg-light py-3 border-bottom-0">
-                            <h4 class="my-0 fw-normal fs-5 text-muted">Товар 1</h4>
-                        </div>
-                        <div class="card-body px-4 pb-4">
-                            <h1 class="card-title pricing-card-title mb-4">$ 100</h1>
-                            <ul class="list-unstyled text-muted small lh-lg mb-4">
-                                <li>10 users included, 2 GB of storage,</li>
-                                <li>Email support, Help center access</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-outline-primary py-2 rounded-2">Купить</button>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="user-container-block" id="dropdownUser">
+                <img src="https://pinimg.com" alt="user" width="32" height="32" class="rounded-circle">
+                <strong>Пользователь</strong>
             </div>
         </div>
     </div>
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="container-fluid text-center">
+            <h1 class="display-5 mt-4 mb-5">Каталог</h1>
 
-    <!-- Автономный скрипт для выпадающего меню -->
+            <!-- Сетка карточек по две в ряд строго по вашему макету -->
+            <div class="catalog-grid">
+
+                <!-- Карточка 1 -->
+                <div class="catalog-col">
+                    <div class="catalog-card">
+                        <div class="thumbnail-box">Thumbnail</div>
+                        <div class="catalog-body">
+                            <p class="catalog-text">
+                                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                            </p>
+                            <div class="catalog-footer">
+                                <div class="btn-group">
+                                    <button type="button" class="btn-card btn-view">View</button>
+                                    <button type="button" class="btn-card btn-edit">Edit</button>
+                                </div>
+                                <span class="time-text">9 mins</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка 2 -->
+                <div class="catalog-col">
+                    <div class="catalog-card">
+                        <div class="thumbnail-box">Thumbnail</div>
+                        <div class="catalog-body">
+                            <p class="catalog-text">
+                                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                            </p>
+                            <div class="catalog-footer">
+                                <div class="btn-group">
+                                    <button type="button" class="btn-card btn-view">View</button>
+                                    <button type="button" class="btn-card btn-edit">Edit</button>
+                                </div>
+                                <span class="time-text">9 mins</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка 3 -->
+                <div class="catalog-col">
+                    <div class="catalog-card">
+                        <div class="thumbnail-box">Thumbnail</div>
+                        <div class="catalog-body">
+                            <p class="catalog-text">
+                                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                            </p>
+                            <div class="catalog-footer">
+                                <div class="btn-group">
+                                    <button type="button" class="btn-card btn-view">View</button>
+                                    <button type="button" class="btn-card btn-edit">Edit</button>
+                                </div>
+                                <span class="time-text">9 mins</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка 4 -->
+                <div class="catalog-col">
+                    <div class="catalog-card">
+                        <div class="thumbnail-box">Thumbnail</div>
+                        <div class="catalog-body">
+                            <p class="catalog-text">
+                                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+                            </p>
+                            <div class="catalog-footer">
+                                <div class="btn-group">
+                                    <button type="button" class="btn-card btn-view">View</button>
+                                    <button type="button" class="btn-card btn-edit">Edit</button>
+                                </div>
+                                <span class="time-text">9 mins</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- /catalog-grid -->
+        </div> <!-- /container-fluid -->
+    </div> <!-- /main-content -->
+
+    <!-- Скрипт для интерактивного открытия меню пользователя -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var btn = document.getElementById('dropdownUser');
-            if (btn) {
+            var menu = document.getElementById('dropdownMenu');
+
+            if (btn && menu) {
                 btn.addEventListener('click', function (e) {
                     e.preventDefault();
-                    var menu = btn.nextElementSibling;
-                    if (menu) {
-                        menu.classList.toggle('show');
-                        var isExpanded = btn.getAttribute('aria-expanded') === 'true';
-                        btn.setAttribute('aria-expanded', !isExpanded);
+                    e.stopPropagation();
+
+                    if (menu.style.display === 'block') {
+                        menu.style.display = 'none';
+                    } else {
+                        menu.style.display = 'block';
                     }
                 });
 
                 document.addEventListener('click', function (e) {
-                    if (!btn.contains(e.target)) {
-                        var menu = btn.nextElementSibling;
-                        if (menu && menu.classList.contains('show')) {
-                            menu.classList.remove('show');
-                            btn.setAttribute('aria-expanded', 'false');
-                        }
+                    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                        menu.style.display = 'none';
                     }
                 });
             }
         });
     </script>
+</body>
+</html>

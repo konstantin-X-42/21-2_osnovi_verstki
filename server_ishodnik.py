@@ -101,10 +101,10 @@ if __name__ == '__main__':
 #         # 2. МАРШРУТИЗАЦИЯ HTML СТРАНИЦ
 #         if self.path == '/' or self.path == '/21-2_home1.html':
 #             filename = '21-2_home1.html'
-#         elif self.path == '/21-2_home2.html':
-#             filename = '21-2_home2.html'
 #         elif self.path == '/21-2_home3.html':
 #             filename = '21-2_home3.html'
+#         elif self.path == '/21-2_home8.html':
+#             filename = '21-2_home8.html'
 #         elif self.path == '/21-2_home4_ishodnik.html':
 #             filename = '21-2_home4_ishodnik.html'
 #         else:
