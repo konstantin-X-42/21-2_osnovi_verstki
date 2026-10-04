@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Категории - Магазин</title>
 
-    <!-- Полные рабочие ссылки на Иконки Bootstrap из удаленного репозитория -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
-
     <style>
-        /* Базовые настройки страницы */
+        /* АВТОНОМНЫЕ СТИЛИ (ЗАМЕНА ВНЕШНЕГО BOOTSTRAP) */
         body {
             background-color: #ffffff;
             margin: 0;
@@ -41,14 +38,13 @@
         .text-center { text-align: center; }
         .text-muted { color: #6c757d; }
         .mb-2 { margin-bottom: 0.5rem; }
-        .mb-3 { margin-bottom: 1rem; }
         .mb-4 { margin-bottom: 1.5rem; }
         .mb-5 { margin-bottom: 3rem; }
         .mt-4 { margin-top: 1.5rem; }
 
-        .display-5 {
+        .display-4 {
             font-size: 2.5rem;
-            font-weight: 400;
+            font-weight: 300;
         }
 
         /* Навигация (меню) */
@@ -84,86 +80,56 @@
         hr { margin: 15px 0; border: 0; border-top: 1px solid rgba(255,255,255,0.15); }
         .rounded-circle { border-radius: 50%; }
 
-        /* ДВУХКОЛОНОЧНАЯ СЕТКА КАТАЛОГА (СТРОГО ПО МАКЕТУ) */
-        .catalog-grid {
+        /* ГОРИЗОНТАЛЬНАЯ СЕТКА КАРТОЧЕК ТОВАРОВ */
+        .products-grid {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
+            gap: 24px;
         }
-        .catalog-col {
-            flex: 1 1 450px;
-            max-width: 480px;
+        .product-col {
+            flex: 1 1 300px;
+            max-width: 320px;
             box-sizing: border-box;
         }
 
-        /* Стили больших карточек с Thumbnail */
-        .catalog-card {
+        /* Стили карточек товаров строго по макету */
+        .card {
             display: flex;
             flex-direction: column;
+            height: 100%;
             background-color: #fff;
             border: 1px solid #dee2e6;
-            border-radius: 4px;
+            border-radius: 8px;
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
             overflow: hidden;
-            box-shadow: 0 .125rem .25rem rgba(0,0,0,.05);
         }
-        .thumbnail-box {
-            background-color: #6c757d;
-            color: #dee2e6;
-            height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
+        .card-header {
+            padding: 16px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
         }
-        .catalog-body {
-            padding: 20px;
-            text-align: left;
-        }
-        .catalog-text {
-            font-size: 0.95rem;
-            color: #212529;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
+        .card-header h4 { margin: 0; font-size: 1.25rem; font-weight: 400; color: #6c757d; }
+        .card-body { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-title { font-size: 2.5rem; margin-top: 0; margin-bottom: 1.5rem; font-weight: 500; }
+        .list-unstyled { list-style: none; padding-left: 0; margin-bottom: 1.5rem; color: #6c757d; font-size: 0.9rem; line-height: 1.6; }
 
-        /* Кнопки и таймер внизу карточки */
-        .catalog-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .btn-group {
-            display: flex;
-        }
-        .btn-card {
-            background-color: #fff;
-            color: #6c757d;
-            border: 1px solid #6c757d;
-            padding: 6px 12px;
-            font-size: 0.875rem;
+        /* Кнопка купить */
+        .btn-outline-primary {
+            color: #2f6bf2;
+            background-color: transparent;
+            border: 1px solid #2f6bf2;
+            padding: 8px 16px;
+            border-radius: 6px;
+            width: 100%;
             cursor: pointer;
-            transition: all 0.15s;
+            font-size: 1rem;
+            transition: all 0.2s;
         }
-        .btn-view {
-            border-top-left-radius: 4px;
-            border-bottom-left-radius: 4px;
-            border-right: none;
-        }
-        .btn-edit {
-            border-top-right-radius: 4px;
-            border-bottom-right-radius: 4px;
-        }
-        .btn-card:hover {
-            background-color: #6c757d;
+        .btn-outline-primary:hover {
             color: #fff;
-        }
-        .time-text {
-            font-size: 0.8rem;
-            color: #6c757d;
+            background-color: #2f6bf2;
         }
 
         /* СТИЛИ ДЛЯ ВЫКАТНОГО МЕНЮ ПОЛЬЗОВАТЕЛЯ */
@@ -221,21 +187,20 @@
     <!-- SIDEBAR -->
     <div class="sidebar">
         <a href="21-2_home1.html" style="color: white; text-decoration: none; font-size: 1.25rem; font-weight: 600; margin-bottom: 20px; display: block;">
-            МЕНЮ
+            Меню
         </a>
         <hr>
 
         <ul class="nav">
             <!-- НАВИГАЦИЯ: Ссылки ведут на файлы страниц -->
             <!-- Кнопка Главная открывает страницу 1 -->
-            <li><a href="21-2_home1.html" class="nav-link nav-link-custom"><i class="bi bi-house-door me-2"></i>Главная</a></li>
-            <!-- Кнопка Категории открывает страницу 2 -->
-            <li><a href="21-2_home2.html" class="nav-link nav-link-custom"><i class="bi bi-grid me-2"></i>Категории</a></li>
-            <!-- Кнопка Заказы (Активная) открывает страницу 3 Каталог -->
-            <li><a href="21-2_home3.html" class="nav-link active-custom"><i class="bi bi-card-list-fill me-2"></i>Заказы</a></li>
+            <li><a href="21-2_home1.html" class="nav-link-custom">Главная</a></li>
+            <!-- Кнопка Категории (Активная) открывает страницу 2 -->
+            <li><a href="21-2_home2.html" class="active-custom">Категории</a></li>
+            <!-- Кнопка Заказы открывает страницу 3 Каталог -->
+            <li><a href="21-2_home3.html" class="nav-link-custom">Заказы</a></li>
             <!-- Кнопка Контакты открывает страницу 4 -->
-            <li><a href="21-2_home4.html" class="nav-link nav-link-custom"><i class="bi bi-telephone me-2"></i>Контакты</a></li>
-
+            <li><a href="21-2_home4.html" class="nav-link-custom">Контакты</a></li>
         </ul>
 
         <hr style="margin-top: auto;">
@@ -255,91 +220,118 @@
             </div>
         </div>
     </div>
+
     <!-- MAIN CONTENT -->
     <div class="main-content">
         <div class="container-fluid text-center">
-            <h1 class="display-5 mt-4 mb-5">Каталог</h1>
+            <h1 class="display-4 fw-normal mt-4 mb-5">Категория 1</h1>
 
-            <!-- Сетка карточек по две в ряд строго по вашему макету -->
-            <div class="catalog-grid">
+            <!-- Локальная сетка: ровные карточки товаров в два ряда -->
+            <div class="products-grid">
 
-                <!-- Карточка 1 -->
-                <div class="catalog-col">
-                    <div class="catalog-card">
-                        <div class="thumbnail-box">Thumbnail</div>
-                        <div class="catalog-body">
-                            <p class="catalog-text">
-                                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                            </p>
-                            <div class="catalog-footer">
-                                <div class="btn-group">
-                                    <button type="button" class="btn-card btn-view">View</button>
-                                    <button type="button" class="btn-card btn-edit">Edit</button>
-                                </div>
-                                <span class="time-text">9 mins</span>
-                            </div>
+                <!-- Товар 1 -->
+                <div class="product-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Товар 1</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title">$ 100</h1>
+                            <ul class="list-unstyled text-center">
+                                <li>10 users included, 2 GB of storage,</li>
+                                <li>Email support, Help center access</li>
+                            </ul>
+                            <button type="button" class="btn-outline-primary">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Карточка 2 -->
-                <div class="catalog-col">
-                    <div class="catalog-card">
-                        <div class="thumbnail-box">Thumbnail</div>
-                        <div class="catalog-body">
-                            <p class="catalog-text">
-                                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                            </p>
-                            <div class="catalog-footer">
-                                <div class="btn-group">
-                                    <button type="button" class="btn-card btn-view">View</button>
-                                    <button type="button" class="btn-card btn-edit">Edit</button>
-                                </div>
-                                <span class="time-text">9 mins</span>
-                            </div>
+                <!-- Товар 2 -->
+                <div class="product-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Товар 1</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title">$ 100</h1>
+                            <ul class="list-unstyled text-center">
+                                <li>10 users included, 2 GB of storage,</li>
+                                <li>Email support, Help center access</li>
+                            </ul>
+                            <button type="button" class="btn-outline-primary">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Карточка 3 -->
-                <div class="catalog-col">
-                    <div class="catalog-card">
-                        <div class="thumbnail-box">Thumbnail</div>
-                        <div class="catalog-body">
-                            <p class="catalog-text">
-                                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                            </p>
-                            <div class="catalog-footer">
-                                <div class="btn-group">
-                                    <button type="button" class="btn-card btn-view">View</button>
-                                    <button type="button" class="btn-card btn-edit">Edit</button>
-                                </div>
-                                <span class="time-text">9 mins</span>
-                            </div>
+                <!-- Товар 3 -->
+                <div class="product-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Товар 1</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title">$ 100</h1>
+                            <ul class="list-unstyled text-center">
+                                <li>10 users included, 2 GB of storage,</li>
+                                <li>Email support, Help center access</li>
+                            </ul>
+                            <button type="button" class="btn-outline-primary">Купить</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Карточка 4 -->
-                <div class="catalog-col">
-                    <div class="catalog-card">
-                        <div class="thumbnail-box">Thumbnail</div>
-                        <div class="catalog-body">
-                            <p class="catalog-text">
-                                This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                            </p>
-                            <div class="catalog-footer">
-                                <div class="btn-group">
-                                    <button type="button" class="btn-card btn-view">View</button>
-                                    <button type="button" class="btn-card btn-edit">Edit</button>
-                                </div>
-                                <span class="time-text">9 mins</span>
-                            </div>
+                <!-- Товар 4 -->
+                <div class="product-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Товар 1</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title">$ 100</h1>
+                            <ul class="list-unstyled text-center">
+                                <li>10 users included, 2 GB of storage,</li>
+                                <li>Email support, Help center access</li>
+                            </ul>
+                            <button type="button" class="btn-outline-primary">Купить</button>
                         </div>
                     </div>
                 </div>
 
-            </div> <!-- /catalog-grid -->
+                <!-- Товар 5 -->
+                <div class="product-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Товар 1</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title">$ 100</h1>
+                            <ul class="list-unstyled text-center">
+                                <li>10 users included, 2 GB of storage,</li>
+                                <li>Email support, Help center access</li>
+                            </ul>
+                            <button type="button" class="btn-outline-primary">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 6 -->
+                <div class="product-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Товар 1</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title">$ 100</h1>
+                            <ul class="list-unstyled text-center">
+                                <li>10 users included, 2 GB of storage,</li>
+                                <li>Email support, Help center access</li>
+                            </ul>
+                            <button type="button" class="btn-outline-primary">Купить</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- /products-grid -->
         </div> <!-- /container-fluid -->
     </div> <!-- /main-content -->
 
